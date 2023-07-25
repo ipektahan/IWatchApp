@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IWatchApp.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IWatchApp.Controllers
 {
@@ -10,6 +11,11 @@ namespace IWatchApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Add(AddItemViewModel addItemRequest)
+        {
+
+        }
 
 
     }

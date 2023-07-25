@@ -1,5 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IWatchApp.Models.AddItemViewModel
+
+ @{
+
+ }
+
+<form method="post" action="Add">
+    <div class="mb-3">
+        <label for="" class="form-label">Type</label>
+        <input type="text" class="form-control" asp-for="Type">
+     </div>
+    <div class="mb-3">
+        <label for="" class="form-label">URL</label>
+        <input type="text" class="form-control" asp-for="URL">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Price</label>
+        <input type="number" class="form-control" asp-for="Price">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Date of Start</label>
+        <input type="date" class="form-control" asp-for="DateofStart">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Date of End</label>
+        <input type="date" class="form-control" asp-for="DateofEnd">
+    </div>
+
+  
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
