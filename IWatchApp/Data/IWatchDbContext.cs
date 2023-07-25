@@ -10,6 +10,6 @@ namespace IWatchApp.Data
         }
 
 
-        public DbSet<Item> MyProperty { get; set; }
+        public DbSet<Item> Items { get; set; }
     }
 }
