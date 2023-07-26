@@ -2,6 +2,7 @@
 using IWatchApp.Models;
 using IWatchApp.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IWatchApp.Controllers
 {
@@ -15,13 +16,20 @@ namespace IWatchApp.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var items = await iwatchDbContext.Items.ToListAsync();
+            return View(items);
+        }
+
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(AddItemViewModel addItemRequest)
+        public async Task<IActionResult> Add(AddItemViewModel addItemRequest)
         {
             var item = new Item()
             {
@@ -33,8 +41,8 @@ namespace IWatchApp.Controllers
                 DateofEnd = addItemRequest.DateofEnd
             };
 
-            iwatchDbContext.Items.Add(item);
-            iwatchDbContext.SaveChanges();
+           await iwatchDbContext.Items.AddAsync(item);
+           await iwatchDbContext.SaveChangesAsync();
             return RedirectToAction("Add");
 
         }

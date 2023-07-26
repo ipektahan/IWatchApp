@@ -1,0 +1,36 @@
+﻿@model List<IWatchApp.Models.Domain.Item>
+
+
+    @{
+
+    }
+
+<h1>Items </h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Price</th>
+                <th>Date of start</th>
+                <th>Date of end</th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Type</td>
+                <td>@item.URL</td>
+                <td>@item.Price</td>
+                <td>@item.DateofStart.ToString("dd-MM-yyyy")</td>
+                <td>@item.DateofEnd.ToString("dd-MM-yyyy")</td>
+
+            </tr>
+        }
+    </tbody>
+
+        </table>
+   

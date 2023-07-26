@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using IWatchApp.Models.Domain;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IWatchApp.Data
 {
