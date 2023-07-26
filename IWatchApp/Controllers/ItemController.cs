@@ -65,11 +65,30 @@ namespace IWatchApp.Controllers
                     DateofEnd = item.DateofEnd
 
                 };
-                return View(viewModel);
+                return await Task.Run(() => View("View", viewModel));
             }
 
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> View(UpdateItemViewModel model)
+        {
+            var item = await iwatchDbContext.Items.FindAsync(model.Id);
+
+            if (item != null)
+            {
+                item.Type= model.Type;
+                item.URL = model.URL; 
+                item.Price= model.Price;
+                item.DateofStart= model.DateofStart;
+                item.DateofEnd= model.DateofEnd;
+
+                await iwatchDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+                  return RedirectToAction("Index");
+        }
     }
 }
