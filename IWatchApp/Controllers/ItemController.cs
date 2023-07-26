@@ -90,5 +90,23 @@ namespace IWatchApp.Controllers
             }
                   return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UpdateItemViewModel model)
+        {
+            var item = await iwatchDbContext.Items.FindAsync(model.Id);
+
+            if(item != null)
+            {
+                iwatchDbContext.Items.Remove(item);
+                await iwatchDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+
+        }
+            
+           
     }
 }
