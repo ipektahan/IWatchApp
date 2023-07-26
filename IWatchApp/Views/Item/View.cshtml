@@ -1,15 +1,17 @@
-﻿@model IWatchApp.Models.AddItemViewModel
+﻿@model IWatchApp.Models.UpdateItemViewModel
 
- @{
+@{
 
- }
-
-
-<form method="post" action="Add">
+}
+<form method="post" action="View">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
     <div class="mb-3">
         <label for="" class="form-label">Type</label>
         <input type="text" class="form-control" asp-for="Type">
-     </div>
+    </div>
     <div class="mb-3">
         <label for="" class="form-label">URL</label>
         <input type="text" class="form-control" asp-for="URL">
@@ -27,7 +29,7 @@
         <input type="date" class="form-control" asp-for="DateofEnd">
     </div>
 
-  
+
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

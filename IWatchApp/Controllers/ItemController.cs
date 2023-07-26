@@ -47,6 +47,29 @@ namespace IWatchApp.Controllers
 
         }
 
+        [HttpGet]
+
+        public async Task<IActionResult> View(Guid id)
+        {
+           var item = await iwatchDbContext.Items.FirstOrDefaultAsync(x => x.Id == id);
+        
+            if(item != null)
+            {
+                var viewModel = new UpdateItemViewModel()
+                {
+                    Id = item.Id,
+                    Type = item.Type,
+                    URL = item.URL,
+                    Price = item.Price,
+                    DateofStart = item.DateofStart,
+                    DateofEnd = item.DateofEnd
+
+                };
+                return View(viewModel);
+            }
+
+            return RedirectToAction("Index");
+        }
 
     }
 }
