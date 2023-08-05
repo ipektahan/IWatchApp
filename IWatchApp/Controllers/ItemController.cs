@@ -2,6 +2,7 @@
 using IWatchApp.Models;
 using IWatchApp.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace IWatchApp.Controllers
@@ -16,9 +17,16 @@ namespace IWatchApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var items = await iwatchDbContext.Items.ToListAsync();
+            //var items = await iwatchDbContext.Items.ToListAsync();
+            ViewData["CurrentFilter"] = SearchString;
+            var items = from item in iwatchDbContext.Items select item;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                items=items.Where(item=> item.Type.Contains(SearchString));
+            }
+           
             return View(items);
         }
 
