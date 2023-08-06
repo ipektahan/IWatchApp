@@ -8,9 +8,11 @@ namespace IWatchApp.Data
     {
         public IWatchDbContext(DbContextOptions options) : base(options)
         {
+
         }
 
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<VideoTypes> Videos { get; set; }
     }
 }
