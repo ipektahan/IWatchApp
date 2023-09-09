@@ -115,7 +115,22 @@ namespace IWatchApp.Controllers
             return RedirectToAction("Index");
 
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> AddURLlink(AddURL addURlrequest)
+        {
+            var videotypes = new VideoTypes()
+            {
+                Id = Guid.NewGuid(),
+                TypeId=addURlrequest.TypeId,
+                TypeURLs = addURlrequest.TypeURLs
+
+
+            };
+            await iwatchDbContext.Videos.AddAsync(videotypes);
+            await iwatchDbContext.SaveChangesAsync();
+            return RedirectToAction("URLList");
+        }
+            
            
     }
 }
