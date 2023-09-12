@@ -13,6 +13,7 @@
 
         public DateTime DateofEnd { get; set; }
 
+        public List<URL> URLs { get; set; }
 
 
     }

@@ -2,7 +2,7 @@
 {
     public class AddURL
     {
-        public Guid Id { get; set; }
+        public  Id { get; set; }
 
         public int TypeId { get; set; }
 
