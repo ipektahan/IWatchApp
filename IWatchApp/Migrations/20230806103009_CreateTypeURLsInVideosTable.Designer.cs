@@ -4,6 +4,7 @@ using IWatchApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWatchApp.Migrations
 {
     [DbContext(typeof(IWatchDbContext))]
-    partial class IWatchDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806103009_CreateTypeURLsInVideosTable")]
+    partial class CreateTypeURLsInVideosTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,23 +53,6 @@ namespace IWatchApp.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("IWatchApp.Models.Domain.URL", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Link")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("URLId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("URLs");
-                });
-
             modelBuilder.Entity("IWatchApp.Models.Domain.VideoTypes", b =>
                 {
                     b.Property<Guid>("Id")
@@ -82,22 +68,6 @@ namespace IWatchApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Videos");
-                });
-
-            modelBuilder.Entity("IWatchApp.Models.Domain.URL", b =>
-                {
-                    b.HasOne("IWatchApp.Models.Domain.Item", "Item")
-                        .WithMany("URLs")
-                        .HasForeignKey("ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
-                });
-
-            modelBuilder.Entity("IWatchApp.Models.Domain.Item", b =>
-                {
-                    b.Navigation("URLs");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,12 @@
 using IWatchApp.Models;
 using IWatchApp.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace IWatchApp.Controllers
 {
@@ -16,9 +21,16 @@ namespace IWatchApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var items = await iwatchDbContext.Items.ToListAsync();
+            //var items = await iwatchDbContext.Items.ToListAsync();
+            ViewData["CurrentFilter"] = SearchString;
+            var items = from item in iwatchDbContext.Items select item;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                items=items.Where(item=> item.Type.Contains(SearchString));
+            }
+           
             return View(items);
         }
 
@@ -105,6 +117,21 @@ namespace IWatchApp.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddURLlink(AddURL addURlrequest)
+        {
+            var videotypes = new VideoTypes()
+            {
+                Id = Guid.NewGuid(),
+                TypeId=addURlrequest.TypeId,
+                TypeURLs = addURlrequest.TypeURLs
+
+
+            };
+            await iwatchDbContext.Videos.AddAsync(videotypes);
+            await iwatchDbContext.SaveChangesAsync();
+            return RedirectToAction("URLList");
         }
             
            
